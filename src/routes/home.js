@@ -7,8 +7,4 @@ router.get('/home', homeController.index);
 
 router.get('/', homeController.index);
 
-<<<<<<< HEAD
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> master

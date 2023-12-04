@@ -8,8 +8,4 @@ module.exports = (app) => {
     app.use('/', homeRouter);
 
     app.use('/service', serviceController);
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> master

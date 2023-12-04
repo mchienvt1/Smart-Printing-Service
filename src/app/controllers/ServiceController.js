@@ -4,4 +4,8 @@ class ServiceController {
     }
 }
 
+<<<<<<< HEAD
 module.exports = new ServiceController();
+=======
+module.exports = new ServiceController();
+>>>>>>> master

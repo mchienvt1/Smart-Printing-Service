@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const Printer = require('../model/printer')
 
 class PrinterController {
@@ -10,6 +11,10 @@ class PrinterController {
     //         else res.status(400).json({error: 'ERROR!'});
     //     });
     // }
+=======
+class PrinterController {
+    // GET /printer
+>>>>>>> master
     index(req, res) {
         res.render('printer');
     }
@@ -20,4 +25,8 @@ class PrinterController {
     }
 }
 
+<<<<<<< HEAD
 module.exports = new PrinterController();
+=======
+module.exports = new PrinterController();
+>>>>>>> master

@@ -2,12 +2,21 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
+<<<<<<< HEAD
 // const { publicDecrypt } = require('crypto');
 const app = express();
 require("dotenv").config();
 
 const port = process.env.PORT;
 
+=======
+const { publicDecrypt } = require('crypto');
+const app = express();
+const port = process.env.PORT;
+
+require("dotenv").config();
+
+>>>>>>> master
 const route = require('./routes');
 
 const database = require("./config/db");
@@ -42,4 +51,8 @@ route(app);
 
 app.listen(port, () => {
     console.log(`Example app listening on port http://localhost:${port}`);
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> master

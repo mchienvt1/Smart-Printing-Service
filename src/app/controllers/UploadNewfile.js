@@ -1,6 +1,6 @@
 class UploadNewfile{
     index(req, res) {
-        res.render('uploadNewfile');
+        res.render('pages/upload-file/index');
     }
 }
 

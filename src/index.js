@@ -19,7 +19,7 @@ const database = require("./config/db");
 database.connect();
 
 // Favicon
-app.use(favicon(__dirname + '/public/img/logobksang.png'));
+app.use(favicon(__dirname + '/public/img/logobksang.ico'));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -45,7 +45,7 @@ app.use(express.json());
 // app.use(morgan('combined'));
 
 // Template engine
-app.set("views", path.join(__dirname, 'resources', 'views'));
+app.set("views", path.join(__dirname, 'views'));
 app.set("view engine", "pug");
 
 // routes init

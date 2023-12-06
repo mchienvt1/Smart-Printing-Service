@@ -2,7 +2,6 @@ const userMiddleware = require("../app/middlewares/userMiddleware");
 
 const printerRouter = require('./printer');
 const homeRouter = require('./home');
-const serviceController = require('./service');
 const userRoutes = require("./user");
 const uploadNewfile = require('./uploadNewfile');
 
@@ -13,8 +12,8 @@ module.exports = (app) => {
     app.use('/', homeRouter);
     
     app.use('/searchPrinter', printerRouter);
-    
-    app.use('/service', serviceController);
 
     app.use("/user", userRoutes);
+
+    app.use("/uploadNewfile", uploadNewfile);
 };

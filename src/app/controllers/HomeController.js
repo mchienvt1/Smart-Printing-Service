@@ -1,9 +1,11 @@
-const { index } = require('./PrinterController');
+// const { index } = require('./PrinterController');
 
-class HomeController {
-    index(req, res) {
-        res.render('home');
-    }
+module.exports.index = async (req, res) => {
+    
+    res.render('pages/home/index',{
+        pageTitle: "Trang chủ",
+        currentURL: req.url,
+    });
+
+    // res.send('home page');
 }
-
-module.exports = new HomeController();

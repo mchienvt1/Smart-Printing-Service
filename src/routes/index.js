@@ -4,6 +4,7 @@ const printerRouter = require('./printer');
 const homeRouter = require('./home');
 const serviceController = require('./service');
 const userRoutes = require("./user");
+const uploadNewfile = require('./uploadNewfile');
 
 module.exports = (app) => {
 

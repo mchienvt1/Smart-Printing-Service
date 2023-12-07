@@ -1,0 +1,72 @@
+
+extends ../../layouts/default.pug
+
+include ../../mixins/box-head.pug
+
+block main
+  .container
+    .row(style='display: flex; align-items: center;')
+      img(src='../img/buy.jpeg', alt='', style='flex: 1; margin-right: 20px;')
+      .frame(style='flex: 1;')
+        p(id='total-quantity') Tổng số giấy bạn đang có: 
+        p
+          span(style='margin-right: 10px;') Chi tiết
+          select.custom-select(id='paper-select1', style='width: 100px;')
+            option(value='a0') A0: 5
+            option(value='a1') A1: 10
+            option(value='a2') A2: 10
+            option(value='a3') A3: 9
+            option(value='a4') A4: 16
+        p
+          span(style='margin-right: 10px;') Loại giấy cần mua và giá tiền/tờ
+          select.custom-select(id='paper-select', style='width: 150px;')
+            option(value='A0') A0: 100 VNĐ
+            option(value='A1') A1: 150 VNĐ
+            option(value='A2') A2: 200 VNĐ
+            option(value='A3') A3: 250 VNĐ
+            option(value='A4') A4: 300 VNĐ
+        p
+          span(style='margin-right: 10px;') Số lượng
+          input.custom-input(id='quantity-input', style='width: 60px;', type='number')
+        p(id='total-price') Thành tiền
+        button.custom-button(style='background-color: white; border: 1px solid blue; color: blue; padding: 10px 20px;', id='buy-button') Mua ngay
+
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      var paperSelect = document.getElementById('paper-select');
+      var quantityInput = document.getElementById('quantity-input');
+      var totalPrice = document.getElementById('total-price');
+      
+      
+
+      paperSelect.addEventListener('change', updateTotalPrice);
+      quantityInput.addEventListener('input', updateTotalPrice);
+      
+
+      function updateTotalPrice() {
+        var selectedPaper = paperSelect.options[paperSelect.selectedIndex].value;
+        var paperPrice = getPrice(selectedPaper);
+        var quantity = parseInt(quantityInput.value);
+
+        if (!isNaN(quantity)) {
+          var totalPriceValue = paperPrice * quantity;
+          totalPrice.textContent = 'Thành tiền: ' + totalPriceValue.toLocaleString() + ' VNĐ';
+        } else {
+          totalPrice.textContent = 'Thành tiền: 0 VNĐ';
+        }
+      }
+
+      function getPrice(paper) {
+        var prices = {
+          'A0': 100,
+          'A1': 150,
+          'A2': 200,
+          'A3': 250,
+          'A4': 300
+        };
+
+        return prices[paper] || 0;
+      }
+
+      
+    });

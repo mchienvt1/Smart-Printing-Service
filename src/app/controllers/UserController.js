@@ -42,23 +42,6 @@ module.exports.loginPost = async (req, res) => {
     return;
   }
 
-  // const cart = await Cart.findOne({
-  //   user_id: user.id,
-  // });
-
-  // if (cart) {
-  //   res.cookie("cartId", cart.id);
-  // } else {
-  //   await Cart.updateOne(
-  //     {
-  //       _id: req.cookies.cartId,
-  //     },
-  //     {
-  //       user_id: user.id,
-  //     }
-  //   );
-  // }
-
   res.cookie("tokenUser", user.tokenUser);
 
   res.redirect("/");
@@ -81,45 +64,14 @@ module.exports.info = async (req, res) => {
 
 //[POST] /user/info
 module.exports.update = (req, res, next) => {
-  const day = req.body.day;
-  const month = req.body.month;
-  const year = req.body.year;
-  const dateOfBirth = new Date(year, month - 1, day);
-
-  const data = {
-    ...req.body,
-    birthday: dateOfBirth,
-  };
   User.updateOne({ _id: req.params.id }, data)
     .then(() => res.redirect("/user/info"))
     .catch(next);
 };
-//[GET] user/purchase
-// module.exports.purchase = async (req, res) => {
-//   // Pagination
-//   const countPurchase = await Order.find({
-//     user_id: req.cookies.tokenUser
-//   }).count();
 
-//   let objectPagination = paginationHelper(
-//     {
-//       currentPage: 1,
-//       limitItems: 4,
-//     },
-//     req.query,
-//     countPurchase,
-//   );
-//   // End Pagination
-
-//   const purchase = await Order.find({
-//     user_id: req.cookies.tokenUser
-//   })
-//   .limit(objectPagination.limitItems)
-//   .skip(objectPagination.skip);
-
-//   res.render("client/pages/user/purchase", {
-//     pageTitle: "Đơn mua",
-//     purchase: purchase,
-//     pagination: objectPagination,
-//   })
-// }
+//[GET] /user/historyprint
+module.exports.historprint = async (req, res) => {
+  res.render("pages/user/historyprint", {
+    User: User,
+  });
+};

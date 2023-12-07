@@ -1,7 +1,25 @@
 extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
 
-block main 
-  .container 
-    .row
-        h3 home
+block main
+  <div class="view" style="background-image: url('/img/homepage.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <!-- Mask & flexbox options-->
+    <div class="mask rgba-gradient d-flex justify-content-center align-items-center">
+      <!-- Content -->
+      <div class="container">
+        <!--Grid row-->
+        <div class="row">
+          <!--Grid column-->
+          <div class="col-md-6 white-text text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft" data-wow-delay="0.3s">
+            <h1 class="h1-responsive font-weight-bold descrip">Dịch vụ in ấn cho sinh viên </h1>
+            <hr class="hr-light">
+            h4(class="mb-4" style="color: #132d65; font-weight: bold; -webkit-text-stroke: 0.5px #fff;") TRƯỜNG ĐẠI HỌC BÁCH KHOA ĐHQG TP.HCM
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </div>
+      <!-- Content -->
+    </div>
+    <!-- Mask & flexbox options-->
+  </div>

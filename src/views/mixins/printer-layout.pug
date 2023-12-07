@@ -1,0 +1,7 @@
+include printer-item.pug
+
+mixin printer-grid(printers)
+  .row
+    .list-group
+        each item in printers
+            +printer-item(item)

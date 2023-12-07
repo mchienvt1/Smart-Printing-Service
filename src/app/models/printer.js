@@ -4,7 +4,8 @@ const printerSchema = new mongoose.Schema(
     {
       printer_id: String,
       brand: String,
-      status: Boolean,
+      status: String,
+      state: String,
       location: String,
       description: String,
     },

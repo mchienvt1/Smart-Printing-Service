@@ -1,4 +1,36 @@
-block main 
-  .container 
-    .row
-        h2 search printer page
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+include ../../mixins/printer-layout.pug
+
+block main
+
+  .container.d-flex.flex-row.justify-content-between.my-4
+    .col-sm-12
+      .col-7.d-flex.flex-column
+        div(style="width: 100%")
+          +box-head("Tìm máy in")
+        .input-group.mb-3
+          input.form-control(type='text' placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby='button-addon2')
+          .input-group-append
+            button#button-addon2.btn.btn-outline-secondary(type='button') Tìm kiếm
+      .col-7.d-flex.flex-column
+        div(style="width: 100%")
+          +box-head("Danh sách máy in")
+          
+          
+          //- if(printers.length > 0)
+          //-   +printer-grid(printers)
+          //- each item in printers
+          //-   p(style="margin-right: 10px; color: #757575; text-decoration: line-through; ") &#8363;#{item.brand}
+
+        .list-group
+          each item in printers
+            a.list-group-item.list-group-item-action(href="#")
+              .d-flex.w-100.justify-content-between 
+                h5.mb-1 Máy in tại #{item.location}
+              p.mb-1 Trạng thái #{item.state}
+      
+      
+        
+  //- .container.d-flex.flex-row-reverse.bd-highlight      
+  //-   +pagination(pagination)

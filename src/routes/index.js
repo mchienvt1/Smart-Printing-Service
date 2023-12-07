@@ -13,6 +13,12 @@ module.exports = (app) => {
 
   app.use("/", homeRouter);
 
+    app.get('/upfile', (req, res) => {
+        res.render('index');
+    });
+
+
+    app.use('/print',printOrderRouter);
   app.use("/searchPrinter", printerRouter);
 
   // app.use("/service", serviceController);

@@ -1,10 +1,12 @@
 const path = require('path');
+const multer = require('multer');
 const express = require('express');
 const bodyParser = require('body-parser');
 const favicon = require('express-favicon');
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const flash = require("express-flash");
+
 
 require("dotenv").config();
 
@@ -20,6 +22,10 @@ database.connect();
 
 // Favicon
 app.use(favicon(__dirname + '/public/img/logobksang.ico'));
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -47,6 +53,15 @@ app.use(express.json());
 // Template engine
 app.set("views", path.join(__dirname, 'views'));
 app.set("view engine", "pug");
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+app.use('/upload', upload.single('file'), (req, res) => {
+    // Render trang hiển thị thông tin về tệp tin đã tải lên
+    res.render('uploaded', { file: req.file });
+  });
+  
 
 // routes init
 route(app);

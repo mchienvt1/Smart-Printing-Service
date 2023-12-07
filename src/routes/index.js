@@ -10,6 +10,11 @@ module.exports = (app) => {
 
     app.use(userMiddleware.infoUser);
 
+    app.get('/upfile', (req, res) => {
+        res.render('index');
+    });
+
+
     app.use('/print',printOrderRouter);
 
     app.use('/', homeRouter);

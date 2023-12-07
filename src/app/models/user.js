@@ -8,14 +8,19 @@ const userSchema = new mongoose.Schema(
     password: String,
     faculty: String,
     numberOfPage: Number,
+    numberofA0: Number,
+    numberofA1: Number,
+    numberofA2: Number,
+    numberofA3: Number,
+    numberofA4: Number,
     tokenUser: {
       type: String,
-      default: generate.generateRandomString(20)
+      default: generate.generateRandomString(20),
     },
     phone: String,
     status: {
       type: String,
-      default: "active"
+      default: "active",
     },
     deleted: {
       type: Boolean,

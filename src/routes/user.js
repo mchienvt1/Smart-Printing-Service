@@ -7,13 +7,6 @@ const validate = require("../app/validates/userValidate");
 const authMiddleware = require("../app/middlewares/authMiddleware");
 // const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware");
 
-// router.patch(
-//   "/:id/update",
-//   upload.single("avatar"),
-// //   uploadCloud.upload,
-//   controller.update
-// );
-
 router.get("/login", controller.login);
 
 router.post("/login", validate.loginPost, controller.loginPost);
@@ -21,5 +14,7 @@ router.post("/login", validate.loginPost, controller.loginPost);
 router.get("/logout", controller.logout);
 
 router.get("/info", authMiddleware.requireAuth, controller.info);
+
+router.get("/historyprint", controller.historprint);
 
 module.exports = router;

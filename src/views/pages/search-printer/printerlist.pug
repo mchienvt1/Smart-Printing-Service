@@ -1,22 +1,26 @@
 extends ../../layouts/default.pug
 include ../../mixins/box-head.pug
-include ../../mixins/product-layout.pug
-include ../../mixins/filter.pug
-include ../../mixins/pagination.pug
 
 block main
-
   .container.d-flex.flex-row.justify-content-between.my-4
-    .col-2-5.d-flex.flex-column(style="width: 25%")
-      +filter(layoutProductsCategory)
-    .col-9-5
-      div(style="width: 100%")
-        +box-head("Kết quả tìm kiếm")
+    .col-sm-12
+      .col-7.d-flex.flex-column
+        div(style="width: 100%")
+          +box-head("Tìm máy in")
+        .input-group.mb-3
+          form(action="/searchPrinter/printerList" method="GET")
+            input.form-control(type='text' placeholder="Nhập vị trí muốn in trong trường" aria-label="Nhập vị trí muốn in trong trường" aria-describedby='button-addon2')
+            .input-group-append
+              button#button-addon2.btn.btn-outline-secondary(type='button') Tìm kiếm
+      .col-7.d-flex.flex-column
         if(printers.length > 0)
-          +product-grid(printers)
-        
+          div(style="width: 100%")
+            +box-head("Kết quả tìm kiếm")
+          .list-group.listres
+            each item in printers
+              a.list-group-item.list-group-item-action(href="#")
+                .d-flex.w-100.justify-content-between 
+                  h5.mb-1 Máy in tại #{item.location}
+                p.mb-1 Trạng thái: #{item.state}
         else
           h3(class="text-center") Không tìm thấy sản phẩm nào
-        
-  .container.d-flex.flex-row-reverse.bd-highlight      
-    +pagination(pagination)

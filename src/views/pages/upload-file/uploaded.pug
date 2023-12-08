@@ -1,0 +1,17 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+
+    h1 File Uploaded Successfully
+    if file
+      img(src=`/uploads/${file.filename}`, alt='Uploaded File')
+      p File Name: #{file.originalname}
+      p File Size: #{file.size} bytes
+    else
+      p No file uploaded.
+  <a href="../" class="btn btn-primary">Quay lại</a>
+  <a href="print/modify" class="btn btn-primary">Xác nhận</a>
+    
+
+    

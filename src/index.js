@@ -6,12 +6,15 @@ const favicon = require('express-favicon');
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const flash = require("express-flash");
+const cors = require('cors');
 
 
 require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT;
+
+app.use(cors());
 
 const route = require('./routes');
 
@@ -23,7 +26,7 @@ database.connect();
 // Favicon
 app.use(favicon(__dirname + '/public/img/logobksang.ico'));
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 
@@ -54,13 +57,13 @@ app.use(express.json());
 app.set("views", path.join(__dirname, 'views'));
 app.set("view engine", "pug");
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+// const storage = multer.memoryStorage();
+// const upload = multer({ storage: storage });
 
-app.use('/upload', upload.single('file'), (req, res) => {
-    // Render trang hiển thị thông tin về tệp tin đã tải lên
-    res.render('uploaded', { file: req.file });
-  });
+// app.use('/upload', upload.single('file'), (req, res) => {
+//     // Render trang hiển thị thông tin về tệp tin đã tải lên
+//     res.render('uploaded', { file: req.file });
+//   });
   
 
 // routes init

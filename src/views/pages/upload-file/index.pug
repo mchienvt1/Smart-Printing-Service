@@ -1,0 +1,29 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+  .container
+    .row
+      .col-lg-12
+        .card.uploadfile
+          .card-header
+            .float-left
+              +box-head("Tải tài liệu in")
+          .card-body.card-block
+            form.form-horizontal(action='/upfile' method='POST' enctype='multipart/form-data' name='title')
+              .row.form-group
+                .col-12.col-md-12
+                  #fields.control-group
+                    label.control-label(for='field1')
+                      | Định dạng tài liệu yêu cầu: .doc .docx .pdf .png .jpg .jpeg .gif
+                    .controls
+                      .entry.input-group.upload-input-group
+                        input.form-control(name='files' type='file' multiple)
+                    button.btn.btn-primary Xác nhận
+
+
+
+        //- form(action='/upload', method='POST', enctype='multipart/form-data')
+        //-   input(type='file', name='file_name')
+        //-   //- button(type="button" class="btn btn-outline-success") 
+        //-   <a href="print/modify" class="btn btn-primary">Xác nhận</a>

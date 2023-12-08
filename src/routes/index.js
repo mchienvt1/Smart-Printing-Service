@@ -3,9 +3,8 @@ const printOrderRouter = require("./printOrder");
 
 const printerRouter = require("./printer");
 const homeRouter = require("./home");
-//const serviceController = require("./service");
 const userRoutes = require("./user");
-const uploadNewfile = require("./uploadNewfile");
+const fileRoutes = require('./uploadNewfile');
 const buyRouter = require("./buy");
 
 module.exports = (app) => {
@@ -13,15 +12,13 @@ module.exports = (app) => {
 
   app.use("/", homeRouter);
 
-    app.get('/upfile', (req, res) => {
-        res.render('index');
-    });
+  app.use('/upfile', fileRoutes);
+
+  // app.use('/api', fileRoutes);
 
 
-    app.use('/print',printOrderRouter);
+  app.use('/print',printOrderRouter);
   app.use("/searchPrinter", printerRouter);
-
-  // app.use("/service", serviceController);
 
   app.use("/user", userRoutes);
   app.use("/buy", buyRouter);

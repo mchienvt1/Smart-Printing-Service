@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-//const printerController = require('../app/controllers/PrinterController');
+const controller = require("../app/controllers/PrinterController");
 
-//router.get('/', printerController.index);
+router.get("/", controller.index);
 
-//router.get('/:slugPrinter', printerController.printlist);
+router.get("/printerList", controller.printlist);
 
 module.exports = router;

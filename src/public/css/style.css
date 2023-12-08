@@ -235,6 +235,19 @@ h6 {
 .form-info {
     margin-top: 10px;
 }
+/* end user info */
+
+/* Search printer */
+.list-group.listprinter {
+  height:500px;
+  overflow-y: scroll;
+}
+
+/* listprinter */
+.list-group.listres {
+  height:500px;
+  overflow-y: scroll;
+}
 
 
 .card-course-item{
@@ -264,15 +277,15 @@ h6 {
   
   
   
-  form {
+  .modifyPrinting .form {
     background-color: rgb(224, 224, 224);
-    padding: 20px;
+    padding: 20px;  
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px; /* Điều chỉnh theo kích thước mong muốn */
   }
   
-  form h2 {
+  .modifyPrinting .form h2 {
     text-align: center;
   }
   
@@ -304,3 +317,19 @@ h6 {
     margin-left: 15px;
   }
   /* Add additional styling as needed */
+
+  /* upload file */
+  .card.uploadfile {
+    margin-top: 100px;
+  }
+  .card.uploadfile .btn-upload {
+      padding: 10px 20px;
+      margin-left: 10px;
+  }
+  .card.uploadfile .upload-input-group {
+      margin-bottom: 10px;
+  }
+  
+  .input-group>.custom-select:not(:last-child), .input-group>.form-control:not(:last-child) {
+    height: 45px;
+  }

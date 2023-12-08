@@ -11,7 +11,7 @@ class PrintOrderController {
     store(req, res, next) {
         const printOrder = new PrintOrder(req.body);
         printOrder.save()
-        res.send('Save data successfully');
+        res.redirect('../searchPrinter');
     }
 
 }

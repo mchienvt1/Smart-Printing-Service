@@ -1,4 +1,6 @@
 
+
+
 extends ../../layouts/default.pug
 
 include ../../mixins/box-head.pug
@@ -8,40 +10,149 @@ block main
     .row(style='display: flex; align-items: center;')
       img(src='../img/buy.jpeg', alt='', style='flex: 1; margin-right: 20px;')
       .frame(style='flex: 1;')
-        p(id='total-quantity') Tổng số giấy bạn đang có: 
-        p
-          span(style='margin-right: 10px;') Chi tiết
-          select.custom-select(id='paper-select1', style='width: 100px;')
-            option(value='a0') A0: 5
-            option(value='a1') A1: 10
-            option(value='a2') A2: 10
-            option(value='a3') A3: 9
-            option(value='a4') A4: 16
-        p
-          span(style='margin-right: 10px;') Loại giấy cần mua và giá tiền/tờ
-          select.custom-select(id='paper-select', style='width: 150px;')
-            option(value='A0') A0: 100 VNĐ
-            option(value='A1') A1: 150 VNĐ
-            option(value='A2') A2: 200 VNĐ
-            option(value='A3') A3: 250 VNĐ
-            option(value='A4') A4: 300 VNĐ
+        p(id='total-quantity') Tổng số tờ bạn đang có: #{user.numberOfPage}
+        fPage
+        table
+          thead
+            tr
+              th(style='padding-right: 20px; border-bottom: 1px solid black;') Loại giấy
+              th(style='padding-right: 20px; border-bottom: 1px solid black;') Số tờ hiện có
+              th(style='border-bottom: 1px solid black;') Giá tiền/tờ
+          tbody
+            tr
+              td(style='padding-right: 20px; border-bottom: 1px solid black;') A0
+              td(style='padding-right: 20px; border-bottom: 1px solid black;', id='A0-quantity') #{user.numberofA0}
+              td(style='border-bottom: 1px solid black;') 100 VNĐ
+            tr
+              td(style='padding-right: 20px; border-bottom: 1px solid black;') A1
+              td(style='padding-right: 20px; border-bottom: 1px solid black;', id='A1-quantity') #{user.numberofA1}
+              td(style='border-bottom: 1px solid black;') 150 VNĐ
+            tr
+              td(style='padding-right: 20px; border-bottom: 1px solid black;') A2
+              td(style='padding-right: 20px; border-bottom: 1px solid black;', id='A2-quantity') #{user.numberofA2}
+              td(style='border-bottom: 1px solid black;') 200 VNĐ
+            tr
+              td(style='padding-right: 20px; border-bottom: 1px solid black;') A3
+              td(style='padding-right: 20px; border-bottom: 1px solid black;', id='A3-quantity') #{user.numberofA3}
+              td(style='border-bottom: 1px solid black;') 250 VNĐ
+            tr
+              td(style='padding-right: 20px; border-bottom: 1px solid black;') A4
+              td(style='padding-right: 20px; border-bottom: 1px solid black;', id='A4-quantity') #{user.numberofA4}
+              td(style='border-bottom: 1px solid black;') 300 VNĐ
+   
+        p(style='margin-top: 20px;')
+          span(style='margin-right: 10px;') Loại giấy cần mua
+          select.custom-select(id='paper-select', style='width: 70px;')
+            option(value='A0') A0
+            option(value='A1') A1
+            option(value='A2') A2
+            option(value='A3') A3
+            option(value='A4') A4
         p
           span(style='margin-right: 10px;') Số lượng
           input.custom-input(id='quantity-input', style='width: 60px;', type='number')
         p(id='total-price') Thành tiền
         button.custom-button(style='background-color: white; border: 1px solid blue; color: blue; padding: 10px 20px;', id='buy-button') Mua ngay
 
+  script(src='https://cdn.jsdelivr.net/npm/sweetalert2@11')
+
   script.
     document.addEventListener('DOMContentLoaded', function() {
       var paperSelect = document.getElementById('paper-select');
       var quantityInput = document.getElementById('quantity-input');
       var totalPrice = document.getElementById('total-price');
-      
-      
+      var totalQuantity = document.getElementById('total-quantity');
+      var buyButton = document.getElementById('buy-button');
 
       paperSelect.addEventListener('change', updateTotalPrice);
       quantityInput.addEventListener('input', updateTotalPrice);
-      
+
+      buyButton.addEventListener('click', showPaymentPopup);
+
+      function showPaymentPopup() {
+        var selectedPaper = paperSelect.options[paperSelect.selectedIndex].value;
+        var quantity = parseInt(quantityInput.value);
+
+        if (!isNaN(quantity)) {
+          var paperPrice = getPrice(selectedPaper);
+          var totalPriceValue = paperPrice * quantity;
+          var currentQuantity = parseInt(totalQuantity.textContent.split(': ')[1]);
+          var updatedQuantity = currentQuantity + quantity;
+
+          
+
+          
+          Swal.fire({
+            title: 'Chọn phương thức thanh toán',
+            html: `
+              <p>
+                <input type="checkbox" id="bkpay-checkbox" name="payment-method">
+                <label for="bkpay-checkbox">BK-Pay</label>
+              </p>
+
+              <p>
+                <input type="checkbox" id="momo-checkbox" name="payment-method">
+                <label for="momo-checkbox">Momo</label>
+              </p>
+            `,
+            showCancelButton: true,
+            confirmButtonText: 'Xác nhận',
+            cancelButtonText: 'Hủy',
+            customClass: {
+              confirmButton: 'swal-button',
+              cancelButton: 'swal-button',
+            },
+            buttonsStyling: false,
+            didOpen: () => {
+              const style = document.createElement('style');
+              style.innerHTML = `
+                .swal-button {
+                  background-color: #fff;
+                  border: 1px solid blue;
+                  color: blue;
+                  margin-right: 10px;
+                  width: 120px;
+                  height: 40px;
+                }
+              `;
+              document.head.appendChild(style);
+              const checkboxes = document.querySelectorAll('input[name="payment-method"]');
+              
+              checkboxes.forEach((checkbox) => {
+                checkbox.addEventListener('change', () => {
+                  checkboxes.forEach((cb) => {
+                    if (cb !== checkbox) {
+                      cb.checked = false;
+                    }
+                  });
+                })});},
+            preConfirm: () => {
+              const checkboxes = document.querySelectorAll('input[name="payment-method"]');
+              const checkedCheckboxes = Array.from(checkboxes).filter((checkbox) => checkbox.checked);
+              
+              if (checkedCheckboxes.length === 0) {
+                Swal.showValidationMessage('Vui lòng chọn ít nhất một phương thức thanh toán');
+                return false;
+              }
+              
+              return true;
+            },
+          })
+          .then(function(result) {
+            if (result.isConfirmed) {
+              
+              totalQuantity.textContent = 'Tổng số tờ bạn đang có: ' + updatedQuantity;
+              updatePaperQuantity(selectedPaper, quantity);
+
+              Swal.fire({
+                icon: 'success',
+                title: 'Mua hàng thành công!',
+                text: 'Cảm ơn bạn đã mua hàng.',
+              });
+            }
+          });
+        }
+      }
 
       function updateTotalPrice() {
         var selectedPaper = paperSelect.options[paperSelect.selectedIndex].value;
@@ -52,7 +163,18 @@ block main
           var totalPriceValue = paperPrice * quantity;
           totalPrice.textContent = 'Thành tiền: ' + totalPriceValue.toLocaleString() + ' VNĐ';
         } else {
-          totalPrice.textContent = 'Thành tiền: 0 VNĐ';
+          totalPrice.textContent = 'Thành tiền: 0VNĐ';
+        }
+      }
+
+      function updatePaperQuantity(paper, quantity) {
+        var paperQuantityElement = document.getElementById(paper + '-quantity');
+        if (paperQuantityElement) {
+          var currentQuantity = parseInt(paperQuantityElement.textContent);
+          if (!isNaN(currentQuantity)) {
+            var updatedQuantity = currentQuantity + quantity;
+            paperQuantityElement.textContent = updatedQuantity;
+          }
         }
       }
 
@@ -67,6 +189,7 @@ block main
 
         return prices[paper] || 0;
       }
-
-      
     });
+
+
+

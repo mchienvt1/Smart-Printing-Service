@@ -24,7 +24,6 @@ MONGO_URL=mongodb+srv://nguyengl03:0979798554@cluster0.rq9sxqs.mongodb.net/spss
 The application will also need a MongoDB server for the backend to connect to the database. If your machine does not have any MongoDB server, install one of your preference. 
 Please connect to our MongoDB Server: 
 ```console
-Please connect to our MongoDB Server:
 mongodb+srv://nguyengl03:0979798554@cluster0.rq9sxqs.mongodb.net/spss
 ```
 You are ready now. Let's start the application.
